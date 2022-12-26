@@ -34,8 +34,6 @@ class Report
 
   def output_body_end; end
 
-  def output_start; end
-
   def output_end; end
 end
 
