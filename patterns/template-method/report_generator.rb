@@ -20,33 +20,23 @@ class Report
     @text.each { |line| output_line(line) }
   end
 
-  def output_start
-    raise 'Called abstract method: output_start'
-  end
+  def output_start; end
 
   def output_head
     raise 'Called abstract method: output_head'
   end
 
-  def output_body_start
-    raise 'Called abstract method: output_body_start'
-  end
+  def output_body_start; end
 
   def output_line(line)
     raise 'Called abstract method: output_line'
   end
 
-  def output_body_end
-    raise 'Called abstract method: output_start'
-  end
+  def output_body_end; end
 
-  def output_start
-    raise 'Called abstract method: output_body_end'
-  end
+  def output_start; end
 
-  def output_end
-    raise 'Called abstract method: output_end'
-  end
+  def output_end; end
 end
 
 # Concrete HTMLReport Subclass
@@ -80,23 +70,17 @@ end
 
 # Concrete PlainTextReport Subclass
 class PlainTextReport < Report
-  def output_start; end
-
   def output_head
     puts "*** #{@title} ***"
   end
 
-  def output_body_start; end
-
   def output_line(line)
     puts line
   end
-
-  def output_body_end; end
-
-  def output_end; end
 end
 
+
+# Example
 report = HTMLReport.new
 report.output_report
 
