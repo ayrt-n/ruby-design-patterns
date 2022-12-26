@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Abstract Report Class
 class Report
   def initialize
     @title = 'Monthly Report'
@@ -48,6 +49,7 @@ class Report
   end
 end
 
+# Concrete HTMLReport Subclass
 class HTMLReport < Report
   def output_start
     puts '<html>'
@@ -76,6 +78,7 @@ class HTMLReport < Report
   end
 end
 
+# Concrete PlainTextReport Subclass
 class PlainTextReport < Report
   def output_start; end
 
