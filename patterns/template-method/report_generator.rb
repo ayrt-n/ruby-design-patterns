@@ -37,7 +37,7 @@ class Report
 
   def output_body_start; end
 
-  def output_line(line)
+  def output_line(_line)
     raise 'Called abstract method: output_line'
   end
 
@@ -85,7 +85,6 @@ class PlainTextReport < Report
     puts line
   end
 end
-
 
 # Example
 report = HTMLReport.new
