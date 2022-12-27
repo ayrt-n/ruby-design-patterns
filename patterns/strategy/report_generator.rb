@@ -14,26 +14,26 @@ class Report
   end
 
   def output_report
-    @formatter.output_report(@title, @text)
+    @formatter.output_report(self)
   end
 end
 
 # Abstract Formatter Class
 class Formatter
-  def output_report(title, text)
+  def output_report(_context)
     raise 'Abstract method called'
   end
 end
 
 # Concrete HTMLReport Subclass
 class HTMLFormatter < Formatter
-  def output_report(title, text)
+  def output_report(context)
     puts '<html>'
     puts '  <head>'
-    puts "    <title>#{title}</title>"
+    puts "    <title>#{context.title}</title>"
     puts '  </head>'
     puts '  <body>'
-    text.each { |line| puts "      <p>#{line}</p>"}
+    context.text.each { |line| puts "      <p>#{line}</p>"}
     puts '  </body>'
     puts '</html>'
   end
@@ -41,9 +41,9 @@ end
 
 # Concrete PlainTextReport Subclass
 class PlainTextFormatter < Formatter
-  def output_report(title, text)
-    puts "*** #{title} ***"
-    text.each { |line| puts line }
+  def output_report(context)
+    puts "*** #{context.title} ***"
+    context.text.each { |line| puts line }
   end
 end
 
