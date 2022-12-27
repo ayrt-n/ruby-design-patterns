@@ -1,13 +1,18 @@
 # frozen_string_literal: true
 
+require_relative './subject'
+
 # The Observer Pattern
 
 # Employee Class
 class Employee
+  include Subject
+
   attr_reader :name, :salary
   attr_accessor :title
 
   def initialize(name, title, salary)
+    super()
     @name = name
     @title = title
     @salary = salary
@@ -17,18 +22,6 @@ class Employee
   def salary=(new_salary)
     @salary = new_salary
     notify_observers
-  end
-
-  def add_observer(observer)
-    @observers << observer
-  end
-
-  def delete_observer(observer)
-    @observers.delete(observer)
-  end
-
-  def notify_observers
-    @observers.each { |observer| observer.update(self) }
   end
 end
 
