@@ -3,6 +3,14 @@
 require 'observer'
 
 # The Observer Pattern
+# Allows you to build components that know about activities of other components
+# without having to tightly couple everything together. Used by creating an interface
+# between the source of news (observable/subject) and the consumer of news (observers)
+
+# Observer pattern has similarities to the Strategy pattern, however, main difference
+# is in the intent. Observer wants to inform other objects of events happening, while
+# in the case of the Strategy pattern, we want the strategy object to do some computing
+# for us
 
 # Employee Class
 class Employee
