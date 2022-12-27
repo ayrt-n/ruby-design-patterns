@@ -8,7 +8,8 @@ require_relative './subject'
 class Employee
   include Subject
 
-  attr_accessor :name, :title, :salary
+  attr_reader :salary
+  attr_accessor :name, :title
 
   def initialize(name, title, salary)
     super()
