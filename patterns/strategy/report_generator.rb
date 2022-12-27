@@ -1,6 +1,16 @@
 # frozen_string_literal: true
 
 # The Strategy Pattern
+# Delegation based approach to varying an algorithm (similar problem as Template
+# method). Strategy pattern used by implementing each version of the algorithm in
+# a separate object and varying the algorithm by supplying different strategies
+# to the context object.
+
+# Two strategies to share data between objects, either by passing as arguments
+# to the strategy, or passing the whole context object itself.
+
+# Light-weight implementation using Proc objects possible, instead of putting
+# strategies into their own objects but only useful if single method implementation.
 
 # Report Class
 class Report
