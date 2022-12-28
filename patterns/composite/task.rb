@@ -52,15 +52,11 @@ class MixTask < Task
   end
 end
 
-# Composite Class
-class MakeBatterTask < Task
-  def initialize
-    super('Make batter')
+# Base Composite Class
+class CompositeTask < Task
+  def initialize(name)
+    super(name)
     @sub_tasks = []
-
-    add_sub_task(AddDryIngredientsTask.new)
-    add_sub_task(AddLiquidsTask.new)
-    add_sub_task(MixTask.new)
   end
 
   def add_sub_task(task)
@@ -72,6 +68,21 @@ class MakeBatterTask < Task
   end
 
   def get_time_required
-    @sub_tasks.reduce { |total, task| total + task.get_time_required }
+    @sub_tasks.reduce(0) { |total, task| total + task.get_time_required }
   end
 end
+
+# Concrete Composite Class
+class MakeBatterTask < CompositeTask
+  def initialize
+    super('Make batter')
+    @sub_tasks = []
+
+    add_sub_task(AddDryIngredientsTask.new)
+    add_sub_task(AddLiquidsTask.new)
+    add_sub_task(MixTask.new)
+  end
+end
+
+# Example Code
+puts MakeBatterTask.new.get_time_required
