@@ -8,7 +8,8 @@
 
 # Component Base Class
 class Task
-  attr_reader :name, :parent
+  attr_reader :name
+  attr_accessor :parent
 
   def initialize(name)
     @name = name
@@ -17,6 +18,10 @@ class Task
 
   def get_time_required
     0.0
+  end
+
+  def total_number_of_basic_tasks
+    1
   end
 end
 
@@ -81,6 +86,10 @@ class CompositeTask < Task
   def get_time_required
     @sub_tasks.reduce(0) { |total, task| total + task.get_time_required }
   end
+
+  def total_number_of_basic_tasks
+    @sub_tasks.reduce(0) { |total, task| total + task.total_number_of_basic_tasks }
+  end
 end
 
 # Concrete Composite Class
@@ -96,4 +105,6 @@ class MakeBatterTask < CompositeTask
 end
 
 # Example Code
-puts MakeBatterTask.new.get_time_required
+make_batter = MakeBatterTask.new
+puts make_batter.get_time_required
+puts make_batter.total_number_of_basic_tasks
