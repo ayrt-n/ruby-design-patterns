@@ -8,10 +8,11 @@
 
 # Component Base Class
 class Task
-  attr_reader :name
+  attr_reader :name, :parent
 
   def initialize(name)
     @name = name
+    @parent = nil
   end
 
   def get_time_required
@@ -61,22 +62,20 @@ class CompositeTask < Task
 
   def add_sub_task(task)
     @sub_tasks << task
+    task.parent = self
   end
 
   def <<(task)
-    @sub_tasks << task
+    add_sub_task(task)
   end
 
   def remove_sub_task(task)
     @sub_tasks.delete(task)
+    task.parent = nil
   end
 
   def [](index)
     @sub_tasks[index]
-  end
-
-  def []=(index, new_value)
-    @sub_tasks[index] = new_value
   end
 
   def get_time_required
