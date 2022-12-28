@@ -5,7 +5,7 @@
 # External Iterator
 class ArrayIterator
   def initialize(array)
-    @array = array
+    @array = Array.new(array) # Creates shallow copy to protect from changes in original
     @index = 0
   end
 
