@@ -6,6 +6,13 @@
 # do not want the code that uses the tree to constantly have to worry about
 # whether it is dealing with a single object or a whole branch
 
+# To build, first need a common interface/base class for all objects referred
+# to as the Component (ask self, what will basic and higher-level objects all
+# have in common when creating this class). Second need one or more Leaf
+# classes, that is, simple indivisible building blocks. Lastly, need higher-
+# level classes called Composites. Composites are components which are built
+# from subcomponents (either more composites or leaf classes)
+
 # Component Base Class
 class Task
   attr_reader :name
