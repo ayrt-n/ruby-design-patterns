@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
 # The Iterator Pattern
+# Two forms of iterators available: the external iterator where an object
+# points down at a member of some collection and the internal iterator
+# where we pass the code that needs to deal with the sub-objects down
 
 # External Iterator
 class ArrayIterator
