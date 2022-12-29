@@ -26,6 +26,10 @@ class CreateFile < Command
     f.write(@contents)
     f.close
   end
+
+  def unexecute
+    File.delete(@path)
+  end
 end
 
 # Class to Delete File
@@ -36,7 +40,16 @@ class DeleteFile < Command
   end
 
   def execute
+    @contents = File.read(@path) if File.exist?(@path)
     File.delete(@path)
+  end
+
+  def unexecute
+    if @contents
+      f = File.open(@path, 'w')
+      f.write(@contents)
+      f.close
+    end
   end
 end
 
@@ -51,6 +64,10 @@ class CopyFile < Command
   def execute
     FileUtils.copy(@source, @target)
   end
+
+  def unexecute
+    # Some implementation of unexecute a copy
+  end
 end
 
 # Combining Composite Pattern to collect and keep track of all commands
@@ -64,7 +81,11 @@ class CompositeCommand < Command
   end
 
   def execute
-    @commands.each { |cmd| cmd.execute }
+    @commands.each { |cmd| cmd&.execute }
+  end
+
+  def unexecute
+    @commands.reverse.each { |cmd| cmd&.unexecute }
   end
 
   def description
