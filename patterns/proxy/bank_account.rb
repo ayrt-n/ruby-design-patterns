@@ -69,3 +69,34 @@ class AccountProctionProxy
     raise "Illegal access: #{Etc.getlogin} cannot access account" if Etc.getlogin != @owner_name
   end
 end
+
+# Example of implementation of virtual proxy
+# Virtual proxy class
+class VirtualAccountProxy
+  def initialize(&creation_block)
+    @creation_block = creation_block
+  end
+
+  def balance
+    s = subject
+    s.balance
+  end
+
+  def deposit(amount)
+    s = subject
+    s.deposit(amount)
+  end
+
+  def withdraw(amount)
+    s = subject
+    s.withdraw(amount)
+  end
+
+  def subject
+    @subject || (@subject = @creation_block.call)
+  end
+end
+
+# Example of how to use virtual proxy
+account = VirtualAccountProxy.new { BankAccount.new(10) }
+account.depost(10)
