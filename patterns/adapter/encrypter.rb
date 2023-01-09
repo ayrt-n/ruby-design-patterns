@@ -1,6 +1,15 @@
 # frozen_string_literal: true
 
 # The Adapter Pattern
+# Helpful in dealing with difference between the interface that we need and
+# the interface that the object actually has. An adapter supports the interface
+# that we need on the outside but implements the interface by making calls to
+# to an object hidden inside (the adaptee), that does everything we need but
+# via the wrong interface.
+
+# You can implement an adapter using the pattern below (creating an actual
+# ___Adapter class) or by working with the original class directly as in
+# the adaptive_adapter.rb example.
 
 # Class which encrypts file
 class Encrypter
