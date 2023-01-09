@@ -23,20 +23,12 @@ end
 
 # Most basic proxy for BankAccount
 class BankAccountProxy
-  def initialize(real_object)
-    @real_object = real_object
+  def initialize(real_account)
+    @subject = real_account
   end
 
-  def balance
-    @real_object.balance
-  end
-
-  def deposit(amount)
-    @real_object.deposit(amount)
-  end
-
-  def withdraw(amount)
-    @real_object.withdraw(amount)
+  def method_missing(name, *args)
+    @subject.send(name, *args)
   end
 end
 
@@ -50,19 +42,9 @@ class AccountProctionProxy
     @owner_name = owner_name
   end
 
-  def balance
+  def method_missing(name, *args)
     check_access
-    @subject.balance
-  end
-
-  def deposit(amount)
-    check_access
-    @subject.deposit(amount)
-  end
-
-  def withdraw(amount)
-    check_access
-    @subject.withdraw(amount)
+    @subject.send(name, *args)
   end
 
   def check_access
@@ -77,19 +59,9 @@ class VirtualAccountProxy
     @creation_block = creation_block
   end
 
-  def balance
+  def method_missing(name, *args)
     s = subject
-    s.balance
-  end
-
-  def deposit(amount)
-    s = subject
-    s.deposit(amount)
-  end
-
-  def withdraw(amount)
-    s = subject
-    s.withdraw(amount)
+    s.send(name, *args)
   end
 
   def subject
@@ -99,4 +71,4 @@ end
 
 # Example of how to use virtual proxy
 account = VirtualAccountProxy.new { BankAccount.new(10) }
-account.depost(10)
+account.deposit(10)
