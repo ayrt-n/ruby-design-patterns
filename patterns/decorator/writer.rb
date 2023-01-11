@@ -1,7 +1,12 @@
 # frozen_string_literal: true
 
 # The Decorator Pattern
-
+# Helpful in assembling the exact functionality that you need at runtime and offers
+# alternative to creating monolithic object which supports every single feature.
+# To use, create one class with the basic functionality and a set of decorators
+# to go with it. Each decorator implements the core interface, but adds its own
+# twist. Each decorator takes a method call, adds its own twist, and then passes
+# it on to the next component down the line (decorator or the real component).
 
 # Class to write plan text
 class SimpleWriter
