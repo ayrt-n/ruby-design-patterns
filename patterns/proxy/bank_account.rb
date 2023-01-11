@@ -1,6 +1,16 @@
 # frozen_string_literal: true
 
 # The Proxy Pattern
+# Proxices can help solve a number of problems. The examples below
+# focus on protecting an object from unauthorized access, hiding the fact the
+# object lives somewhere else on the network, and delaying the creation of
+# an expensive object until the last instant.Proxies pretend to be some
+# other object but are not and instead include a hidden reference to the
+# real object referred to as the subject.
+
+# In short, a proxy can control access to the subject, while keeping the
+# logic separate from the subject itself. The proxy can implement the
+# methods themselves directly or use method_missing (as in example below).
 
 
 # Class representation of Bank Account
